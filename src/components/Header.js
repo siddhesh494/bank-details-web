@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { addUser, removeUser } from '../utils/userSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { notifyError, notifySuccess } from '../utils/alert';
 
 const Header = () => {
   const navigate = useNavigate()
@@ -41,11 +42,12 @@ const Header = () => {
     signOut(auth).then(() => {
       // Sign-out successful.
       navigate('/')
-      
+      notifySuccess("User Logged Out")
     }).catch((error) => {
       // An error happened.
       // navigate to error page
 
+      notifyError("Error while logging out")
     });
   }
 

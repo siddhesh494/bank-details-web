@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { addUser } from '../utils/userSlice';
 import { useDispatch } from 'react-redux';
 import Header from './Header';
+import { notifyError, notifySuccess } from '../utils/alert';
 
 const Login = () => {
 
@@ -53,14 +54,15 @@ const Login = () => {
               displayName
             }))
             navigate('/home')
-
+            notifySuccess("User LoggedIn")
 
           }).catch((error) => {
             // An error occurred
-            const errorCode = error.code;
+            // const errorCode = error.code;
             const errorMessage = error.message;
             // ..
-            setErrorMessage(`${errorCode}-${errorMessage}`)
+            notifyError(errorMessage)
+            setErrorMessage(`${errorMessage}`)
           });
 
         })
@@ -68,7 +70,8 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           // ..
-          setErrorMessage(`${errorCode}-${errorMessage}`)
+          notifyError(errorMessage)
+          setErrorMessage(`${errorMessage}`)
         });
 
     } else {
@@ -77,12 +80,14 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in 
           // const user = userCredential.user;
+          notifySuccess("User LoggedIn")
           navigate('/home')
         })
         .catch((error) => {
-          const errorCode = error.code;
+          // const errorCode = error.code;
           const errorMessage = error.message;
-          setErrorMessage(`${errorCode}-${errorMessage}`)
+          notifyError(errorMessage)
+          setErrorMessage(`${errorMessage}`)
         });
     }
 
