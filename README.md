@@ -26,6 +26,8 @@ mongoPort="27017"
 npm start
 ```
 
+### I have use firebase for authentication
+
 ## API cURL
 - To get active customer
   ```
